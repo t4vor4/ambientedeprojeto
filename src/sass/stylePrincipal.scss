@@ -1,0 +1,10 @@
+$black: #00f;
+
+body {
+    color: $black;
+    .aghfd {
+        &:hover {
+            color: $black;
+        }
+    }
+}

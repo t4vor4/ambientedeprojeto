@@ -1,0 +1,37 @@
+{
+  "name": "gerador-de-personagem",
+  "version": "0.0.1",
+  "description": "Gerador de personagem baseado no utilizado no curso de desenho",
+  "main": "gulpfile.js",
+  "scripts": {
+    "dev": "gulp local",
+    "bsync": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Gerador",
+    "generator",
+    "desenho",
+    "draw"
+  ],
+  "author": "Fernando Tavora dos Santos",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.26.7",
+    "browserify": "^16.5.1",
+    "concurrently": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^4.13.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {}
+}
