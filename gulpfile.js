@@ -1,6 +1,5 @@
-const { src, dest, gulp, series, parallel, watch } = require('gulp');
+const { src, dest, series, parallel, watch } = require('gulp');
 
-const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
 sass.compiler = require('node-sass');	
 const browserify = require("browserify");
@@ -16,14 +15,14 @@ const path = {
 }
 
 //Compila o sass
-const compileSass = () => {
+const compileSass = async _ => {
     return src(`${path.src}/sass/stylePrincipal.scss`)
         .pipe(sass().on('error', sass.logError))
         .pipe(dest(`${path.dest}/css`));
 }
 
 
-const javascriptBuild = _ => {
+const javascriptBuild = async _ => {
     // Start by calling browserify with our entry pointing to our main javascript file
     return (
         browserify({
@@ -41,19 +40,25 @@ const javascriptBuild = _ => {
             .pipe(dest(`${path.dest}/js`))
     );
 }
-const bsReload = _ => browserSync.reload();
+const bsReload = _ => browserSync.reload;
 
 // Observa mudanças no sass
-const watchSass = _ =>  watch(path.src+'/**/*.scss', series(compileSass,bsReload));
+const watchSass = _ =>  watch(path.src+'/**/*.scss', compileSass);
 
-const watchJs = _ =>  watch(path.src+'/**/*.js', series(javascriptBuild, bsReload));
+const watchJs = _ =>  watch(path.src+'/**/*.js', javascriptBuild);
+
+const watchReloadJs = _ =>  watch(path.src+'/**/*.js').on("change", browserSync.reload);
+
+const watchReloadJson = _ =>  watch(path.src+'/**/*.json').on("change", browserSync.reload);
+
+const watchReloadCss = _ =>  watch(path.src+'/**/*.scss').on("change", browserSync.reload);
 
 const watchHtml = _ =>  watch('./index.html', bsReload);
 
-const bSync = _ => browserSync.init({proxy: "http://localhost:8080/"}); // colocar a url correta aqui.
+const bSync = _ => browserSync.init({injectChanges: true, proxy: "http://localhost:8080/"}); // colocar a url correta aqui.
 
-const bSyncServer = _ => browserSync.init( {server: { baseDir: "./" }} );
+const bSyncServer = _ => browserSync.init( { server: { baseDir: "./" }} );
 
 
-exports.default = series(compileSass, javascriptBuild, parallel( watchHtml, watchSass, watchJs, bSync) );
-exports.local = series(compileSass, javascriptBuild, parallel( watchHtml, watchSass, watchJs, bSyncServer) );
+exports.default = series(compileSass, javascriptBuild, parallel( watchHtml, watchSass, watchJs, watchReloadCss, watchReloadJs, watchReloadJson, bSync) );
+exports.local = series(compileSass, javascriptBuild, parallel( watchHtml, watchSass, watchJs, watchReloadCss, watchReloadJs, watchReloadJson, bSyncServer) );
