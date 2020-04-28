@@ -7,6 +7,7 @@ const babelify = require("babelify");
 const source = require("vinyl-source-stream");
 const buffer = require("vinyl-buffer");
 const uglify = require("gulp-uglify");
+const cleanCSS = require('gulp-clean-css');
 const browserSync = require('browser-sync').create();
 
 const path = {
@@ -18,6 +19,7 @@ const path = {
 const compileSass = async _ => {
     return src(`${path.src}/sass/stylePrincipal.scss`)
         .pipe(sass().on('error', sass.logError))
+        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(dest(`${path.dest}/css`));
 }
 

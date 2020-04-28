@@ -1,7 +1,7 @@
 {
-  "name": "gerador-de-personagem",
+  "name": "ambiente-de-projeto",
   "version": "0.0.1",
-  "description": "Gerador de personagem baseado no utilizado no curso de desenho",
+  "description": "Ambiente de desenvolvimento de projetos pessoais",
   "main": "gulpfile.js",
   "scripts": {
     "dev": "gulp local",
@@ -9,10 +9,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "Gerador",
-    "generator",
-    "desenho",
-    "draw"
   ],
   "author": "Fernando Tavora dos Santos",
   "license": "ISC",
@@ -25,10 +21,12 @@
     "concurrently": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
+    "jquery": "^3.5.0",
     "node-sass": "^4.13.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
